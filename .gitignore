@@ -33,4 +33,3 @@ build
 *.iws
 *.ipr
 *.idea
-/L01-gradle/build/generated/
