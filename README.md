@@ -8,3 +8,7 @@
 Александр Оруджев<br>
 Вячеслав Лапин<br>
 Виталий Куценко<br>
+
+### Студент
+Heroglaber (Буданин Александр)<br>
+alexander.budanin@gmail.com<br>
