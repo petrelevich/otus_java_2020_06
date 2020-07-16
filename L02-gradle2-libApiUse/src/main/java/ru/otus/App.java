@@ -18,7 +18,7 @@ public class App {
         // Случай 2
         // в модуле L02-gradle2-libApi стоит implementation 'com.google.guava:guava'
         // и тут guava НЕ доступна, т.е. зависимость "изолирована"
-        System.out.println(com.google.common.collect.Lists.reverse(new ArrayList<>()));
+        //System.out.println(com.google.common.collect.Lists.reverse(new ArrayList<>()));
 
     }
 }
