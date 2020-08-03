@@ -13,6 +13,7 @@
 # Package Files #
 *.jar
 !gradle-wrapper.jar
+!hw01-gradle-0.1-all.jar
 *.war
 *.nar
 *.ear

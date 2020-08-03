@@ -1,13 +1,4 @@
 //user manual at https://docs.gradle.org/6.1.1/userguide/multi_project_builds.html
 
 rootProject.name = 'otusJava'
-include 'L01-gradle'
-include 'L02-gradle2'
-include 'L02-gradle2-libApi'
-include 'L02-gradle2-libApiUse'
-include 'L03-generics'
-include 'L04-qa'
-include 'L05-collections'
-include 'L06-reflection'
-include 'L08-gc'
-include 'L09-remoteDebug'
+include 'hw02-gradle'
