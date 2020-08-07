@@ -16,10 +16,6 @@ public class MonadExample {
     result = monadExample.function(null);
     System.out.println(result);
 
-
-    result = monadExample.functionWrong("test");
-    System.out.println(result);
-
     result = monadExample.functionWrong(null);
     System.out.println(result);
   }
@@ -35,7 +31,6 @@ public class MonadExample {
   //некорректное использование монады
   private String functionWrong(String str) {
     Optional<String> optional = Optional.ofNullable(str);
-
     if (optional.isPresent()) {
       return optional.get() + "+addStr";
     }

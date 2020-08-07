@@ -34,10 +34,6 @@ public class Lambda {
     System.out.println("1:" + closure.get());
     System.out.println("2:" + closure.get());
     System.out.println("3:" + closure.get());
-
-
-//    Runnable thread = System.out::println;
-//    thread.run();
   }
 
 
@@ -48,7 +44,7 @@ public class Lambda {
   @NotNull
   @Contract(pure = true)
   private Supplier<Integer> generator() {
-    final int[] initValue = {0}; //Переменная не только effectively final, но и effectively private :)
+    int[] initValue = {0}; //Переменная не только effectively final, но и effectively private :)
     return () -> ++initValue[0];
   }
 }

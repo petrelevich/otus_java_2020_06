@@ -73,9 +73,6 @@ public class Simplification {
       }
     }
     System.out.println(stepCount);
-
-
-
     return keyA.equals(keyB);
   }
 
