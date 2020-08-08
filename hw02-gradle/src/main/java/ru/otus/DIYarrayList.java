@@ -66,7 +66,8 @@ public class DIYarrayList<T> implements List<T> {
             elementData = new Object[newSize];
             System.arraycopy(bufList, 0, elementData, 0, size);
         }
-        elementData[size++] = t;
+        elementData[size] = t;
+        size++;
 
         return true;
     }
