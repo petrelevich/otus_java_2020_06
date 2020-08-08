@@ -193,40 +193,9 @@ public class DIYarrayList<T> implements List<T> {
     }
 
     private class ListItr extends Itr implements ListIterator<T>{
-        //int cursor;
-        //int lastRet = -1;
-
-        //ListItr() {}
         ListItr(int index) {
             cursor = index;
         }
-
-        /*
-        @Override
-        public boolean hasNext() {
-            return cursor != size;
-        }
-        */
-
-        /*
-        @Override
-        public T next() {
-            int i = cursor;
-            if (i >= size) {
-                throw new NoSuchElementException();
-            }
-
-            cursor = i + 1;
-            T res = null;
-            try {
-                res = (T) elementData[lastRet = i];
-            }catch (ClassCastException e){
-                throw new ClassCastException();
-            }
-
-            return res;
-        }
-        */
 
         @Override
         public boolean hasPrevious() {
@@ -238,7 +207,6 @@ public class DIYarrayList<T> implements List<T> {
             int i = cursor - 1;
             if (i < 0)
                 throw new NoSuchElementException();
-
 
             T res = null;
             try {
@@ -261,22 +229,8 @@ public class DIYarrayList<T> implements List<T> {
             return cursor - 1;
         }
 
-        /*
-        @Override
-        public void remove() {
-            if (lastRet < 0)
-                throw new IllegalStateException();
-
-            DIYarrayList.this.remove(lastRet);
-            cursor = lastRet;
-            lastRet = -1;
-        }
-        */
-
         @Override
         public void set(T e) {
-            //System.out.println("ListItr::set();\tlastRet: " + lastRet);
-
             if (lastRet < 0)
                 throw new IllegalStateException();
 
@@ -299,17 +253,6 @@ public class DIYarrayList<T> implements List<T> {
     public ListIterator<T> listIterator(int index) {
         throw new UnsupportedOperationException();
     }
-
-
-    @Override
-    public void sort(Comparator<? super T> c) {
-        try {
-            Arrays.sort((T[]) elementData, 0, size, c);
-        }catch (ClassCastException e){
-            e.printStackTrace();
-        }
-    }
-
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
