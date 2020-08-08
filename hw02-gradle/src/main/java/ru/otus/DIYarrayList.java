@@ -59,8 +59,8 @@ public class DIYarrayList<T> implements List<T> {
     public boolean add(T t) {
         if (size == elementData.length) {
             Object[] bufList = elementData;
-            if(size == MAX_ARRAY_LENGTH){
-                throw new OutOfMemoryError("Required array length too large");
+            if(size >= MAX_ARRAY_LENGTH){
+                throw new IllegalStateException("Not enough memory for adding new element.");
             }
             int newSize = Math.min(size * 2, MAX_ARRAY_LENGTH);
             elementData = new Object[newSize];
