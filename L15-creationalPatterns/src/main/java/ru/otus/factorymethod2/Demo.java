@@ -15,7 +15,7 @@ public class Demo {
 
     // или из БД
     var factory2 = ConfigurationFactory.getConfiguration("db");
-    config = factory1.buildConfiguration();
+    config = factory2.buildConfiguration();
     System.out.println(config.params());
 
     // или еще откуда-то ...
