@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 class ComplexProcessorTest {
 
     @Test
-    @DisplayName("Тестируем последовательность вызова процессоров")
+    @DisplayName("Тестируем вызовы процессоров")
     void handleProcessorsTest() {
         //given
         var message = new Message.Builder().field7("field7").build();
