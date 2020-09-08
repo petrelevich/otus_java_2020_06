@@ -1,5 +1,7 @@
 package ru.otus.jdbc;
 
+import ru.otus.core.model.User;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,10 +36,10 @@ public class DbExecutorImpl<T> implements DbExecutor<T> {
     }
 
     @Override
-    public Optional<T> executeSelect(Connection connection, String sql, long id,
+    public Optional<T> executeSelect(Connection connection, String sql, Object id,
                                      Function<ResultSet, T> rsHandler) throws SQLException {
         try (var pst = connection.prepareStatement(sql)) {
-            pst.setLong(1, id);
+            pst.setObject(1, id);
             try (var rs = pst.executeQuery()) {
                 return Optional.ofNullable(rsHandler.apply(rs));
             }
