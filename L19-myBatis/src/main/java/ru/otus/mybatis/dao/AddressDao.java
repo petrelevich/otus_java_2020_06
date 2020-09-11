@@ -9,7 +9,7 @@ import java.util.List;
 public interface AddressDao {
 
   @Insert("insert into address(id, personId, city) values (#{id}, #{personId}, #{city})")
-  int insert(Address person);
+  int insert(Address address);
 
   @Select("select * from address where id = #{id}")
   Address selectOne(int id);

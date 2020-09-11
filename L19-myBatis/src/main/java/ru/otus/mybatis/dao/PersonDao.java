@@ -14,7 +14,7 @@ public interface PersonDao {
     @Select("select * from person where id = #{id}")
     Person selectOne(Integer id);
 
-    @Select("select person.* from person join address where address.city = #{city}")
+    @Select("select person.* from person join address on person.id = address.personId where address.city = #{city}")
     List<Person> selectByCity(String city);
 
 
