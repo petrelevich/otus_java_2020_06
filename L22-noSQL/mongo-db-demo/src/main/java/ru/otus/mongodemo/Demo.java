@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 
 public class Demo {
-  //private static final String MONGODB_URL = "mongodb://localhost"; // Работа без DockerToolbox
-  private static final String MONGODB_URL = "mongodb://192.168.99.100"; // Работа через DockerToolbox
+  private static final String MONGODB_URL = "mongodb://localhost:30001"; // Работа без DockerToolbox
+  //private static final String MONGODB_URL = "mongodb://192.168.99.100:30001"; // Работа через DockerToolbox
 
   private static final String MONGO_DATABASE_NAME = "mongo-db-test";
 

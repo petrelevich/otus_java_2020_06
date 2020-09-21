@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class Demo {
 
     private static final int CASSANDRA_PORT = 9042;
-    //private static final String CASSANDRA_HOST = "localhost"; // Работа без DockerToolbox
-    private static final String CASSANDRA_HOST = "192.168.99.100"; // Работа через DockerToolbox
+    private static final String CASSANDRA_HOST = "localhost"; // Работа без DockerToolbox
+    //private static final String CASSANDRA_HOST = "192.168.99.100"; // Работа через DockerToolbox
 
     public static void main(String[] args) throws Throwable {
         val motorolaC350 = new Phone(UUID.randomUUID(), "C350",

@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 public class Demo {
     private static final int REDIS_PORT = 6379;
-    //private static final String REDIS_HOST = "localhost"; // Работа ,tp DockerToolbox
-    private static final String REDIS_HOST = "192.168.99.100"; // Работа через DockerToolbox
+    private static final String REDIS_HOST = "localhost"; // Работа ,tp DockerToolbox
+    //private static final String REDIS_HOST = "192.168.99.100"; // Работа через DockerToolbox
 
     public static void main(String[] args) throws Throwable {
         val motorolaC350 = new Phone(UUID.randomUUID().toString(),

@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "sleeping for 180 seconds"
-sleep 60
+sleep 30
 
 echo mongo_setup.sh time now: `date +"%T" `
 mongo --host mongo1:27017 <<EOF

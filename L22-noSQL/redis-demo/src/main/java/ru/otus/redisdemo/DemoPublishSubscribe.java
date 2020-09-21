@@ -16,8 +16,8 @@ public class DemoPublishSubscribe {
     private static final String MESSAGE_QUEUE_CHANNEL_NAME = "message-queue";
 
     private static final int REDIS_PORT = 6379;
-    //private static final String REDIS_HOST = "localhost"; // Работа без DockerToolbox
-    private static final String REDIS_HOST = "192.168.99.100"; // Работа через DockerToolbox
+    private static final String REDIS_HOST = "localhost"; // Работа без DockerToolbox
+    //private static final String REDIS_HOST = "192.168.99.100"; // Работа через DockerToolbox
 
     public static void main(String[] args) throws Throwable {
         val publisher = new Jedis(REDIS_HOST, REDIS_PORT);

@@ -1,8 +1,13 @@
 package ru.otus.cassandrademo.schema;
 
 import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.cql.SimpleStatement;
 import lombok.RequiredArgsConstructor;
 import ru.otus.cassandrademo.db.CassandraConnection;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 @RequiredArgsConstructor
 public class CassandraPhonesSchemaInitializer implements CassandraSchemaInitializer {
@@ -17,8 +22,11 @@ public class CassandraPhonesSchemaInitializer implements CassandraSchemaInitiali
 
     @Override
     public void dropSchemaIfExists() {
-        String query = "DROP KEYSPACE IF EXISTS Products";
-        cassandraConnection.getSession().execute(query);
+        cassandraConnection.getSession()
+                .execute(SimpleStatement.builder("DROP KEYSPACE IF EXISTS Products")
+                        .setTimeout(Duration.of(10, ChronoUnit.SECONDS))
+                        .build()
+                );
     }
 
     private void createKeySpace(CqlSession session) {

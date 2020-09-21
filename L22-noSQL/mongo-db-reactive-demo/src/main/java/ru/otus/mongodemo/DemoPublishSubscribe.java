@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 public class DemoPublishSubscribe {
 
-    //public static final String MONGODB_URL = "mongodb://localhost"; // Работа без DockerToolbox
-    public static final String MONGODB_URL = "mongodb://192.168.99.100"; // Работа через DockerToolbox
+    public static final String MONGODB_URL = "mongodb://localhost:30001"; // Работа без DockerToolbox
+    //public static final String MONGODB_URL = "mongodb://192.168.99.100:30001"; // Работа через DockerToolbox
     private static final String DB_NAME = "mongo-db-test";
     private static final String PRODUCTS_COLLECTION = "products";
 

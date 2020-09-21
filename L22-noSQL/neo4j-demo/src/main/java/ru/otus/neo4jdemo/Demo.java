@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 public class Demo {
     private static final int NEO4J_PORT = 7687;
-    // private static final String NEO4J_HOST = "localhost"; // Работа без DockerToolbox
-    private static final String NEO4J_HOST = "192.168.99.100"; // Работа через DockerToolbox
+     private static final String NEO4J_HOST = "localhost"; // Работа без DockerToolbox
+    //private static final String NEO4J_HOST = "192.168.99.100"; // Работа через DockerToolbox
     private static final String NEO4J_URL = "bolt://" + NEO4J_HOST + ":" + NEO4J_PORT;
 
     public static void main(String[] args) throws Throwable {

@@ -8,7 +8,7 @@ services:
     expose:
       - 27017
     ports:
-      - 27017:27017
+      - 30001:27017
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
 
@@ -19,7 +19,7 @@ services:
     expose:
       - 27017
     ports:
-      - 27018:27017
+      - 30002:27017
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
 
@@ -30,7 +30,7 @@ services:
     expose:
       - 27017
     ports:
-      - 27019:27017
+      - 30003:27017
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
 
@@ -52,7 +52,6 @@ services:
       - "7199:7199"
     depends_on:
       - mongosetup
-
 
   redis:
     image: redis:latest
