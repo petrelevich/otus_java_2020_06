@@ -2,22 +2,21 @@ package ru.otus.server;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.eclipse.jetty.http.HttpMethod;
 import org.junit.jupiter.api.*;
 import ru.otus.dao.UserDao;
 import ru.otus.model.User;
 import ru.otus.services.TemplateProcessor;
 import ru.otus.services.UserAuthService;
 
-import java.io.IOException;
 import java.net.*;
-import java.util.List;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static ru.otus.server.utils.HttpUrlConnectionHelper.*;
 import static ru.otus.server.utils.WebServerHelper.*;
 
 @DisplayName("Тест сервера должен ")
@@ -36,9 +35,12 @@ class UsersWebServerImplTest {
 
     private static Gson gson;
     private static UsersWebServer webServer;
+    private static HttpClient http;
 
     @BeforeAll
     static void setUp() throws Exception {
+        http = HttpClient.newHttpClient();
+
         TemplateProcessor templateProcessor = mock(TemplateProcessor.class);
         UserDao userDao = mock(UserDao.class);
         UserAuthService userAuthService = mock(UserAuthService.class);
@@ -60,37 +62,39 @@ class UsersWebServerImplTest {
     @DisplayName("возвращать 302 при запросе пользователя по id если не выполнен вход ")
     @Test
     void shouldReturnForbiddenStatusForUserRequestWhenUnauthorized() throws Exception {
-        HttpURLConnection connection = sendRequest(buildUrl(WEB_SERVER_URL, API_USER_URL, null), HttpMethod.GET);
-        connection.setInstanceFollowRedirects(false);
-        int responseCode = connection.getResponseCode();
-        assertThat(responseCode).isEqualTo(HttpURLConnection.HTTP_MOVED_TEMP);
+        HttpRequest request = HttpRequest.newBuilder().GET()
+                .uri(URI.create(buildUrl(WEB_SERVER_URL, API_USER_URL)))
+                .build();
+        HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
+        assertThat(response.statusCode()).isEqualTo(HttpURLConnection.HTTP_MOVED_TEMP);
     }
 
     @DisplayName("возвращать ID сессии при выполнении входа с верными данными")
     @Test
     void shouldReturnJSessionIdWhenLoggingInWithCorrectData() throws Exception {
-        HttpCookie jSessionIdCookie = login(buildUrl(WEB_SERVER_URL, LOGIN_URL, null), DEFAULT_USER_LOGIN, DEFAULT_USER_PASSWORD);
+        HttpCookie jSessionIdCookie = login(buildUrl(WEB_SERVER_URL, LOGIN_URL), DEFAULT_USER_LOGIN, DEFAULT_USER_PASSWORD);
         assertThat(jSessionIdCookie).isNotNull();
     }
 
     @DisplayName("не возвращать ID сессии при выполнении входа если данные входа не верны")
     @Test
     void shouldNotReturnJSessionIdWhenLoggingInWithIncorrectData() throws Exception {
-        HttpCookie jSessionIdCookie = login(buildUrl(WEB_SERVER_URL, LOGIN_URL, null), INCORRECT_USER_LOGIN, DEFAULT_USER_PASSWORD);
+        HttpCookie jSessionIdCookie = login(buildUrl(WEB_SERVER_URL, LOGIN_URL), INCORRECT_USER_LOGIN, DEFAULT_USER_PASSWORD);
         assertThat(jSessionIdCookie).isNull();
     }
 
     @DisplayName("возвращать корректные данные при запросе пользователя по id если вход выполнен")
     @Test
-    void shouldReturnCorrectUserWhenAuthorized() throws IOException {
-        HttpCookie jSessionIdCookie = login(buildUrl(WEB_SERVER_URL, LOGIN_URL, null), DEFAULT_USER_LOGIN, DEFAULT_USER_PASSWORD);
+    void shouldReturnCorrectUserWhenAuthorized() throws Exception {
+        HttpCookie jSessionIdCookie = login(buildUrl(WEB_SERVER_URL, LOGIN_URL), DEFAULT_USER_LOGIN, DEFAULT_USER_PASSWORD);
 
-        HttpURLConnection connection = sendRequest(buildUrl(WEB_SERVER_URL, API_USER_URL, List.of(String.valueOf(DEFAULT_USER_ID))), HttpMethod.GET);
-        connection.setRequestProperty(COOKIE_HEADER, String.format("%s=%s", jSessionIdCookie.getName(), jSessionIdCookie.getValue()));
-        int responseCode = connection.getResponseCode();
-        String response = readResponseFromConnection(connection);
+        HttpRequest request = HttpRequest.newBuilder().GET()
+                .uri(URI.create(buildUrl(WEB_SERVER_URL, API_USER_URL,String.valueOf(DEFAULT_USER_ID))))
+                .setHeader(COOKIE_HEADER, String.format("%s=%s", jSessionIdCookie.getName(), jSessionIdCookie.getValue()))
+                .build();
+        HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
 
-        assertThat(responseCode).isEqualTo(HttpURLConnection.HTTP_OK);
-        assertThat(response).isEqualTo(gson.toJson(DEFAULT_USER));
+        assertThat(response.statusCode()).isEqualTo(HttpURLConnection.HTTP_OK);
+        assertThat(response.body()).isEqualTo(gson.toJson(DEFAULT_USER));
     }
 }
