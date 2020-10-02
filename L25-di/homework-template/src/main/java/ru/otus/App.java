@@ -21,7 +21,7 @@ public class App {
         //AppComponentsContainer container = new AppComponentsContainerImpl(AppConfig1.class, AppConfig2.class);
 
         // Тут можно использовать библиотеку Reflections (см. зависимости)
-        //AppComponentsContainer container = new AppComponentsContainerImpl("ru.otus.services");
+        //AppComponentsContainer container = new AppComponentsContainerImpl("ru.otus.config");
 
         // Обязательный вариант
         AppComponentsContainer container = new AppComponentsContainerImpl(AppConfig.class);
