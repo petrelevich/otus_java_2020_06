@@ -29,13 +29,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = WebConfig.class)
 @WebAppConfiguration
-@ExtendWith(MockitoExtension.class)
 class UserRestControllerWithContextTest {
 
     private MockMvc mvc;
-
-    @Mock
-    private UsersService usersService;
 
     @Autowired
     private WebApplicationContext context;
