@@ -17,7 +17,7 @@ public class ChannelExample {
     }
 
     private void go() throws IOException, URISyntaxException {
-        Path path = Paths.get(ClassLoader.getSystemResource("share.xml").toURI());
+        var path = Paths.get(ClassLoader.getSystemResource("share.xml").toURI());
         try (var fileChannel = FileChannel.open(path)) {
             var buffer = ByteBuffer.allocate(10);
 
